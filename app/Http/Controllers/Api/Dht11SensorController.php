@@ -10,24 +10,19 @@ class Dht11SensorController extends Controller
 {
     public function index()
     {
-        return response()->json(Dht11Sensor::all());
+        $sensors = Dht11Sensor::all();
+        return response()->json($sensors);
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'humidity' => 'required|numeric',
             'temperature' => 'required|numeric',
         ]);
 
-        $dht11Sensor = new Dht11Sensor();
-        $dht11Sensor->humidity = $request->humidity;
-        $dht11Sensor->temperature = $request->temperature;
-        $dht11Sensor->save();
+        $sensor = Dht11Sensor::create($validatedData);
 
-        return response()->json([
-            'message' => 'Sensor data stored successfully',
-            'data' => $dht11Sensor
-        ], 201);
+        return response()->json($sensor, 201);
     }
 }
