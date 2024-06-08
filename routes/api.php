@@ -24,7 +24,8 @@ Route::group(['as' => 'api.'], function () {
     Route::post('sensors/mq', [MqSensorController::class, 'store'])
         ->name('sensors.mq.store');
 
-    Route::get('sensors/dht11', [Dht11SensorController::class, 'index']);
+    Route::get('sensors/dht11', [Dht11SensorController::class, 'index'])
+        ->name('sensors.dht11.index');
     Route::post('sensors/dht11', [Dht11SensorController::class, 'store']);
 
     Route::resource('sensors/rain', RainSensorController::class)
