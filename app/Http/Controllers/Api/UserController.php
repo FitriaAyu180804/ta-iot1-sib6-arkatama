@@ -42,10 +42,10 @@ class UserController extends Controller
                 'required',
                 'min:8'
             ],
-            // 'role' => [
-            //     'required',
-            //     'in:admin,user'
-            // ],
+            'role' => [
+                'required',
+                'in:admin,user'
+            ],
             // 'password_confirmation' => [
             //     'required',
             //     'same:password'
@@ -109,10 +109,10 @@ class UserController extends Controller
                 'nullable',
                 'min:8'
             ],
-            // 'role' => [
-            //     'required',
-            //     'in:admin,user'
-            // ],
+            'role' => [
+                'required',
+                'in:admin,user'
+            ],
             // 'password_confirmation' => [
             //     'required',
             //     'same:password'

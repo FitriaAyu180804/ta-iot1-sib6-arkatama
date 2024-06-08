@@ -12,13 +12,13 @@
         </div>
         <div class="iq-card-body">
             <div class="table-responsive">
-                 <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
+                <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
                     aria-describedby="user-list-page-info">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            {{-- <th>Role</th> --}}
+                            <th>Role</th>
                             <th>Join Date</th>
                             <th>Action</th>
                         </tr>
@@ -28,14 +28,14 @@
                             <tr>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                {{-- <td>
+                                <td>
                                     @if ($user->role == 'admin')
                                         <span class="badge badge-primary"> <i class="ri-user-star-fill"></i>Admin</span>
                                     @else
                                         <span class="badge badge-secondary"><i class="ri-user-fill"></i>
                                             User</span>
                                     @endif
-                                </td> --}}
+                                </td>
                                 <td>{{ $user->created_at->format('d M Y, H:i:s') }}</td>
                                 <td>
                                     <div class="flex align-items-center list-user-action">
@@ -78,13 +78,13 @@
                             <input required type="email" class="form-control" id="addEmail" name="email">
                         </div>
 
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="addRole">Role</label>
                             <select class="form-control" id="addRole" name="role">
                                 <option value="admin">Admin</option>
                                 <option value="user" selected>User</option>
                             </select>
-                        </div> --}}
+                        </div>
 
                         <div class="form-group">
                             <label for="addPassword">Password</label>
@@ -120,14 +120,14 @@
                             <label for="editEmail">Email</label>
                             <input required type="email" class="form-control" id="editEmail" name="email">
                         </div>
-{{--
+
                         <div class="form-group">
                             <label for="editRole">Role</label>
                             <select class="form-control" id="editRole" name="role">
                                 <option value="admin">Admin</option>
                                 <option value="user">User</option>
                             </select>
-                        </div> --}}
+                        </div>
 
                         <div class="form-group">
                             <label for="editPassword">Password</label>
@@ -170,7 +170,7 @@
                 name: $('#addName').val(),
                 email: $('#addEmail').val(),
                 password: $('#addPassword').val(),
-                // role: $('#addRole').val(),
+                role: $('#addRole').val(),
             }
 
             // kirim data ke server POST /users
@@ -226,7 +226,7 @@
                 name: $('#editName').val(),
                 email: $('#editEmail').val(),
                 password: $('#editPassword').val(),
-                // role: $('#editRole').val(),
+                role: $('#editRole').val(),
                 _method: 'PUT'
             }
 
@@ -320,7 +320,7 @@
                     // isi form editModal dengan data user
                     $('#editName').val(response.data.name);
                     $('#editEmail').val(response.data.email);
-                    // $('#editRole').val(response.data.role);
+                    $('#editRole').val(response.data.role);
 
                     // tampilkan modal editModal
                     $('#editModal').modal('show');
