@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
-
-use App\Http\Controllers\Controller;
-use App\Models\Dht11Sensor;
+namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Models\Dht11Sensor;
 
 class Dht11SensorController extends Controller
 {
     public function index()
     {
-        $data = Dht11Sensor::orderBy('created_at', 'desc')->first();
-        return response()->json(['data' => $data], 200);
+        return response()->json(Dht11Sensor::all());
     }
 
     public function store(Request $request)
@@ -21,11 +18,14 @@ class Dht11SensorController extends Controller
             'temperature' => 'required|numeric',
         ]);
 
-        $sensorData = new Dht11Sensor();
-        $sensorData->humidity = $request->humidity;
-        $sensorData->temperature = $request->temperature;
-        $sensorData->save();
+        $dht11Sensor = new Dht11Sensor();
+        $dht11Sensor->humidity = $request->humidity;
+        $dht11Sensor->temperature = $request->temperature;
+        $dht11Sensor->save();
 
-        return response()->json(['message' => 'Data stored successfully'], 201);
+        return response()->json([
+            'message' => 'Sensor data stored successfully',
+            'data' => $dht11Sensor
+        ], 201);
     }
 }
