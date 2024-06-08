@@ -12,7 +12,7 @@
         </div>
         <div class="iq-card-body">
             <div class="table-responsive">
-                {{-- <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid" --}}
+                 <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
                     aria-describedby="user-list-page-info">
                     <thead>
                         <tr>
