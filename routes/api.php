@@ -18,18 +18,12 @@ Route::group(['as' => 'api.'], function () {
     Route::resource('users', UserController::class)
         ->except(['create', 'edit']);
 
+    Route::resource('sensor/mq', MqSensorController::class)
+        ->names(['sensors.mq']);
 
-    Route::get('sensors/mq', [MqSensorController::class, 'index'])
-        ->name('sensors.mq.index');
-
-    Route::post('sensors/mq', [MqSensorController::class, 'store'])
-        ->name('sensors.mq.store');
-
-    Route::get('sensors/dht11', [Dht11SensorController::class, 'index'])
-        ->name('sensors.dht11.index');
-
-    Route::post('sensors/dht11/store', [Dht11SensorController::class, 'store'])
-        ->name('sensors.dht11.store');
+    Route::resource('sensor/dht11', Dht11SensorController::class)
+        ->names('sensors.dht11')
+        ->only(['index','store']);
 
     Route::resource('sensors/rain', RainSensorController::class)
         ->names('sensors.rain');
