@@ -70,7 +70,7 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
     <script>
-        let chartGas, gaugeGas, gaugeHumidity, gaugeTemperature;
+        let chartGas, gaugeGas, gaugeHumidity, gaugeTemperature, gaugeRain;
 
         async function requestData() {
             const result = await fetch("{{ route('api.sensors.mq.index') }}");
@@ -112,10 +112,10 @@
                 const data = await result.json();
                 const sensorData = data.data;
 
-                const value = sensorData.humidity;
+                const humidity = sensorData.humidity;
 
                 if (gaugeHumidity) {
-                    gaugeHumidity.series[0].setData([Number(value)], true, true, true);
+                    gaugeHumidity.series[0].setData([Number(humidity)], true, true, true);
                 }
 
                 setTimeout(requestGaugeHumidity, 3000);
@@ -128,10 +128,10 @@
                 const data = await result.json();
                 const sensorData = data.data;
 
-                const value = sensorData.temperature;
+                const temperature = sensorData.temperature;
 
                 if (gaugeTemperature) {
-                    gaugeTemperature.series[0].setData([Number(value)], true, true, true);
+                    gaugeTemperature.series[0].setData([Number(temperature)], true, true, true);
                 }
 
                 setTimeout(requestGaugeTemperature, 3000);
@@ -153,6 +153,7 @@
                 setTimeout(requestGaugeRain, 3000);
             }
         }
+
         window.addEventListener('load', function() {
             chartGas = new Highcharts.Chart({
                 chart: {
@@ -404,18 +405,18 @@
                     lineWidth: 0,
                     plotBands: [{
                         from: 0,
-                        to: 20,
+                        to: 10,
                         color: '#55BF3B', // green
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 20,
-                        to: 35,
+                        from: 10,
+                        to: 30,
                         color: '#DDDF0D', // yellow
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 35,
+                        from: 30,
                         to: 50,
                         color: '#DF5353', // red
                         thickness: 20,
@@ -479,8 +480,8 @@
                 },
                 yAxis: {
                     min: 0,
-                    max: 100,
-                    tickPixelInterval: 10,
+                    max: 1000,
+                    tickPixelInterval: 50,
                     tickPosition: 'inside',
                     tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
                     tickLength: 20,
@@ -495,19 +496,19 @@
                     lineWidth: 0,
                     plotBands: [{
                         from: 0,
-                        to: 40,
+                        to: 199,
                         color: '#55BF3B', // green
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 40,
-                        to: 60,
+                        from: 200,
+                        to: 299,
                         color: '#DDDF0D', // yellow
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 60,
-                        to: 100,
+                        from: 300,
+                        to: 1000,
                         color: '#DF5353', // red
                         thickness: 20,
                         borderRadius: '50%'
@@ -517,10 +518,10 @@
                     name: 'Rain',
                     data: [0],
                     tooltip: {
-                        valueSuffix: ' mm'
+                        valueSuffix: ' rain'
                     },
                     dataLabels: {
-                        format: '{y} mm',
+                        format: '{y} rain',
                         borderWidth: 0,
                         color: (
                             Highcharts.defaultOptions.title &&
@@ -546,4 +547,5 @@
             });
         });
     </script>
+
 @endpush
