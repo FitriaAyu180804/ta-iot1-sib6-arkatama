@@ -487,7 +487,7 @@
                 },
                 yAxis: {
                     min: 0,
-                    max: 100,
+                    max: 2000,
                     tickPixelInterval: 72,
                     tickPosition: 'inside',
                     tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
@@ -503,19 +503,19 @@
                     lineWidth: 0,
                     plotBands: [{
                         from: 0,
-                        to: 49,
+                        to: 999,
                         color: '#55BF3B', // green
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 50,
-                        to: 79,
+                        from: 1000,
+                        to: 1500,
                         color: '#DDDF0D', // yellow
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 80,
-                        to: 100,
+                        from: 1501,
+                        to: 2000,
                         color: '#DF5353', // red
                         thickness: 20,
                         borderRadius: '50%'

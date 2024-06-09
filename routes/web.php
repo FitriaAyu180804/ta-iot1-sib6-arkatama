@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\LedController;
+use App\Service\WhatsappNotificationService;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,6 +29,14 @@ Route::middleware('auth')->group(function () {
     //users
     Route::get('users', [UserController::class, 'index'])->name('users.index');
 
+    Route::get('/whatsapp', function () {
+        $target = '083111803798';
+        $message = 'Ada kebocoran gas di rumah anda, segera cek dan perbaiki';
+        $response = WhatsappNotificationService::sendMessage($target, $message);
+
+        echo $response;
+    });
+
 });
 
 Route::get('/sensor', function () {
@@ -43,4 +52,8 @@ Route::controller(LedController::class)->group(function () {
     Route::get('/leds', 'index')->name('led.index');
     Route::post('/leds', 'store')->name('led.store');
 });
+
+;
+
+
 require __DIR__.'/auth.php';

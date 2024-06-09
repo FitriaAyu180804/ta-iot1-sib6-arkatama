@@ -18,9 +18,9 @@
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('dashboard') }}">
-        <a class="nav-link" href="{{ route('led.index') }}">
-            <i class="fas fa-lightbulb"></i>
-            <span>LED Control</span></a>
+            <a class="nav-link" href="{{ route('led.index') }}">
+                <i class="fas fa-lightbulb"></i>
+                <span>LED Control</span></a>
     </li>
     <div class="card w-100">
         <div class="card-body">
@@ -47,8 +47,9 @@
                                             <p class="text-muted">Pin: {{ $led->pin }}</p>
 
                                             <div class="form-check form-switch">
-                                                <input @checked($led->status == '1') class="form-check-input" type="checkbox"
-                                                    id="flexSwitchCheckDefault">
+                                                <input @checked($led->status == '1') class="form-check-input toggle-status"
+                                                    data-id="{{ $led->id }}" data-status="{{ $led->status ? 0 : 1 }}"
+                                                    type="checkbox">
                                             </div>
                                         </div>
                                     </div>
@@ -86,6 +87,7 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">LED Name</label>
                             <input type="text" class="form-control" name="name" id="name" placeholder="Nama LED">
+
                         </div>
 
                         <div class="mb-3">
@@ -102,4 +104,23 @@
         </div>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            $('.toggle-status').click(function() {
+                var id = $(this).data('id');
+                var status = $(this).data('status');
+                $.ajax({
+                    url: '/api/v1/leds/' + id,
+                    type: 'PUT',
+                    data: {
+                        status: status,
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
