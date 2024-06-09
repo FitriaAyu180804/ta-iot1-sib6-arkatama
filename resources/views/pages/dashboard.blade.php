@@ -7,7 +7,7 @@
             <div class="card iq-mb-3">
                 <div class="card-body">
                     <h4 class="card-title">Monitoring Sensor Gas</h4>
-                    <p class="card-text">Grafik berikut adalah monitoring sensor gas 3 menit terakhir.</p>
+                    {{-- <p class="card-text">Grafik berikut adalah monitoring sensor gas 3 menit terakhir.</p> --}}
                     <div id="monitoringGas"></div>
                     <p class="card-text"><small class="text-muted">Terakhir diubah 3 menit lalu</small></p>
                 </div>
@@ -17,7 +17,7 @@
             <div class="card iq-mb-3">
                 <div class="card-body">
                     <h4 class="card-title">Monitoring Sensor Gas</h4>
-                    <p class="card-text">Grafik berikut adalah monitoring sensor gas 3 menit terakhir.</p>
+                    {{-- <p class="card-text">Grafik berikut adalah monitoring sensor gas 3 menit terakhir.</p> --}}
                     <div id="gaugeGas"></div>
                     <p class="card-text"><small class="text-muted">Terakhir diubah 3 menit lalu</small></p>
                 </div>
@@ -29,7 +29,7 @@
             <div class="card iq-mb-3">
                 <div class="card-body">
                     <h4 class="card-title">Monitoring Kelembaban (DHT11)</h4>
-                    <p class="card-text">Grafik berikut adalah monitoring kelembaban sensor DHT11 3 menit terakhir.</p>
+                    {{-- <p class="card-text">Grafik berikut adalah monitoring kelembaban sensor DHT11 3 menit terakhir.</p> --}}
                     <div id="gaugeHumidity"></div>
                     <p class="card-text"><small class="text-muted">Terakhir diubah 3 menit lalu</small></p>
                 </div>
@@ -41,7 +41,7 @@
             <div class="card iq-mb-3">
                 <div class="card-body">
                     <h4 class="card-title">Monitoring Suhu (DHT11)</h4>
-                    <p class="card-text">Grafik berikut adalah monitoring suhu sensor DHT11 3 menit terakhir.</p>
+                    {{-- <p class="card-text">Grafik berikut adalah monitoring suhu sensor DHT11 3 menit terakhir.</p> --}}
                     <div id="gaugeTemperature"></div>
                     <p class="card-text"><small class="text-muted">Terakhir diubah 3 menit lalu</small></p>
                 </div>
@@ -53,7 +53,7 @@
             <div class="card iq-mb-3">
                 <div class="card-body">
                     <h4 class="card-title">Monitoring Sensor Hujan</h4>
-                    <p class="card-text">Grafik berikut adalah monitoring sensor hujan 3 menit terakhir.</p>
+                    {{-- <p class="card-text">Grafik berikut adalah monitoring sensor hujan 3 menit terakhir.</p> --}}
                     <div id="gaugeRain"></div>
                     <p class="card-text"><small class="text-muted">Terakhir diubah 3 menit lalu</small></p>
                 </div>
@@ -65,6 +65,7 @@
 @push('scripts')
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
@@ -299,7 +300,7 @@
                 yAxis: {
                     min: 0,
                     max: 100,
-                    tickPixelInterval: 10,
+                    tickPixelInterval: 72,
                     tickPosition: 'inside',
                     tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
                     tickLength: 20,
@@ -314,18 +315,18 @@
                     lineWidth: 0,
                     plotBands: [{
                         from: 0,
-                        to: 40,
+                        to: 29,
                         color: '#DF5353', // red
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 40,
+                        from: 30,
                         to: 60,
                         color: '#DDDF0D', // yellow
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 60,
+                        from: 61,
                         to: 100,
                         color: '#55BF3B', // green
                         thickness: 20,
@@ -388,9 +389,9 @@
                     size: '110%'
                 },
                 yAxis: {
-                    min: 0,
-                    max: 50,
-                    tickPixelInterval: 5,
+                    min: -20,
+                    max: 100,
+                    tickPixelInterval: 72,
                     tickPosition: 'inside',
                     tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
                     tickLength: 20,
@@ -404,20 +405,26 @@
                     },
                     lineWidth: 0,
                     plotBands: [{
-                        from: 0,
-                        to: 10,
+                        from: -20,
+                        to: 0,
+                        color: '#DF5353', // red
+                        thickness: 20,
+                        borderRadius: '50%'
+                    }, {
+                        from: 1,
+                        to: 30,
                         color: '#55BF3B', // green
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 10,
-                        to: 30,
+                        from: 31,
+                        to: 60,
                         color: '#DDDF0D', // yellow
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 30,
-                        to: 50,
+                        from: 61,
+                        to: 100,
                         color: '#DF5353', // red
                         thickness: 20,
                         borderRadius: '50%'
@@ -480,8 +487,8 @@
                 },
                 yAxis: {
                     min: 0,
-                    max: 1000,
-                    tickPixelInterval: 50,
+                    max: 100,
+                    tickPixelInterval: 72,
                     tickPosition: 'inside',
                     tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
                     tickLength: 20,
@@ -496,19 +503,19 @@
                     lineWidth: 0,
                     plotBands: [{
                         from: 0,
-                        to: 199,
+                        to: 49,
                         color: '#55BF3B', // green
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 200,
-                        to: 299,
+                        from: 50,
+                        to: 79,
                         color: '#DDDF0D', // yellow
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 300,
-                        to: 1000,
+                        from: 80,
+                        to: 100,
                         color: '#DF5353', // red
                         thickness: 20,
                         borderRadius: '50%'
@@ -547,7 +554,4 @@
             });
         });
     </script>
-
 @endpush
-
-
