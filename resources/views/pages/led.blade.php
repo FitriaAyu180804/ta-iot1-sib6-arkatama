@@ -15,7 +15,6 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-
     <li class="nav-item">
         <a class="nav-link" href="{{ route('dashboard') }}">
             <a class="nav-link" href="{{ route('led.index') }}">
@@ -58,8 +57,14 @@
                                         <i class="fas fa-ellipsis-v fa-fw" id="dropdownMenuButton1"
                                             data-bs-toggle="dropdown" aria-expanded="false"></i>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" href="#">Edit</a></li>
-                                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                                            <li><a class="dropdown-item edit-led" href="#" data-id="{{ $led->id }}" data-name="{{ $led->name }}" data-pin="{{ $led->pin }}">Edit</a></li>
+                                            <li>
+                                                <form action="{{ url('/api/v1/leds/' . $led->id) }}" method="POST" class="d-inline delete-form">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="dropdown-item">Delete</button>
+                                                </form>
+                                            </li>
                                         </ul>
                                     </div>
 
@@ -72,7 +77,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Add LED Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form action="{{ route('led.store') }}" method="POST">
@@ -87,12 +92,43 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">LED Name</label>
                             <input type="text" class="form-control" name="name" id="name" placeholder="Nama LED">
-
                         </div>
 
                         <div class="mb-3">
                             <label for="pin" class="form-label">LED Pin</label>
                             <input type="number" class="form-control" name="pin" id="pin" placeholder="Nama LED">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit LED Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="" method="POST" id="editForm">
+                <div class="modal-content">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit LED</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="editName" class="form-label">LED Name</label>
+                            <input type="text" class="form-control" name="name" id="editName" placeholder="Nama LED">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editPin" class="form-label">LED Pin</label>
+                            <input type="number" class="form-control" name="pin" id="editPin" placeholder="Nama LED">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -118,6 +154,38 @@
                     },
                     success: function(response) {
                         location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        alert('An error occurred while updating the status: ' + xhr.responseText);
+                    }
+                });
+            });
+
+            $('.edit-led').click(function() {
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                var pin = $(this).data('pin');
+
+                $('#editName').val(name);
+                $('#editPin').val(pin);
+
+                $('#editForm').attr('action', '/api/v1/leds/' + id);
+                $('#editModal').modal('show');
+            });
+
+            $('.delete-form').submit(function(event) {
+                event.preventDefault();
+                var form = $(this);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    type: 'DELETE',
+                    data: form.serialize(),
+                    success: function(response) {
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        alert('An error occurred while deleting the LED: ' + xhr.responseText);
                     }
                 });
             });

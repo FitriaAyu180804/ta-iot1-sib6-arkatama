@@ -40,18 +40,18 @@ class LedController extends Controller
     function store(Request $request) {
         $validated = $request->validate([
             "name" => [
-                "required",
+                // "required",
                 "string",
                 "min:3",
                 "max:255",
             ],
             "pin" => [
-                "required",
+                // "required",
                 "numeric",
                 "between:0,39",
             ],
             "status" => [
-                "required",
+                // "required",
                 "boolean",
             ],
         ]);

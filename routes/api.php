@@ -32,17 +32,13 @@ Route::group(['as' => 'api.'], function () {
         ->names('sensors.rain');
 
         Route::prefix('v1/leds')->name('leds.')->group(function () {
-            Route::get('/', [LedController::class, 'index'])
-                ->name('index');
-            Route::get('/{id}', [LedController::class, 'show'])
-                ->name('show');
-            Route::post('/', [LedController::class, 'store'])
-                ->name('store');
-            Route::put('/{id}', [LedController::class, 'update'])
-                ->name('update');
-            Route::delete('/{id}', [LedController::class, 'destroy'])
-                ->name('destroy');
+            Route::get('/', [LedController::class, 'index'])->name('index');
+            Route::get('/{id}', [LedController::class, 'show'])->name('show');
+            Route::post('/', [LedController::class, 'store'])->name('store');
+            Route::put('/{id}', [LedController::class, 'update'])->name('update');
+            Route::delete('/{id}', [LedController::class, 'destroy'])->name('destroy');
         });
+
 
 
 });
