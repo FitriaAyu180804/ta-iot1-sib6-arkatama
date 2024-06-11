@@ -20,6 +20,24 @@ Route::get('/dashboard', function () {
     return view('pages.dashboard', $data);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+
+Route::get('/sensor', function () {
+    $data['title'] = 'Sensor';
+    $data['breadcrumbs'][]= [
+        'title' => 'Sensor',
+        'url' => route('sensor.index')
+    ];
+    return view('pages.sensor', $data);
+})->middleware(['auth', 'verified'])->name('sensor.index');
+
+Route::controller(LedController::class)->group(function () {
+    Route::get('/leds', 'index')->name('led.index');
+    Route::post('/leds', 'store')->name('led.store');
+});
+
+
+
 // adalah route yang hanya boleh diakses jika sudah login
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -38,22 +56,6 @@ Route::middleware('auth')->group(function () {
     });
 
 });
-
-Route::get('/sensor', function () {
-    $data['title'] = 'Sensor';
-    $data['breadcrumbs'][]= [
-        'title' => 'Sensor',
-        'url' => route('sensor.index')
-    ];
-    return view('pages.sensor', $data);
-})->middleware(['auth', 'verified'])->name('sensor.index');
-
-Route::controller(LedController::class)->group(function () {
-    Route::get('/leds', 'index')->name('led.index');
-    Route::post('/leds', 'store')->name('led.store');
-});
-
-;
 
 
 require __DIR__.'/auth.php';
