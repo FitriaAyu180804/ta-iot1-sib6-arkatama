@@ -16,13 +16,13 @@
       <nav class="iq-sidebar-menu">
         <ul id="iq-sidebar-toggle" class="iq-menu">
           <li class="iq-menu-title"><i class="ri-separator"></i><span>Main</span></li>
-          <li class="
+          {{-- <li class="
           @if (request()->url() == route('dashboard'))
             active
           @endif
           ">
             <a href="{{ route('dashboard')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
-          </li>
+          </li> --}}
           <li class="
           @if (request()->url() ==  route('sensor.index'))
             active

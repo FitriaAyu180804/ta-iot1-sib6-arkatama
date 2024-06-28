@@ -1,5 +1,4 @@
-<?php
-
+<?
 namespace App\Service;
 
 use App\Models\SentMessage;
@@ -70,8 +69,8 @@ class WhatsappNotificationService
 
     public static function notifikasiKebocoranGasMassal($nilaiSensor)
     {
-        $nilaiMaksimalSensor = 100; //contoh
-        $durasiPesan = 1; //contoh dalam menit
+        $nilaiMaksimalSensor = 100; // contoh
+        $durasiPesan = 1; // contoh dalam menit
 
         $jenisSensor = 'mq5';
 
@@ -103,7 +102,3 @@ class WhatsappNotificationService
         }
     }
 }
-
-// mengambil token dari config/wasender.php
-// mengirimkan pesan ke nomor whatsapp
-// notifikasi kebocoran gas
