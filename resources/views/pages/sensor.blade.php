@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <!-- DHT11 Sensor Monitoring (Humidity) -->
+        {{-- <!-- DHT11 Sensor Monitoring (Humidity) -->
         <div class="col-sm-10 col-md-4">
             <div class="card iq-mb-3">
                 <div class="card-body">
@@ -34,7 +34,7 @@
                     <p class="card-text"><small class="text-muted">Terakhir diubah 3 menit lalu</small></p>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- DHT11 Sensor Monitoring (Temperature) -->
         <div class="col-sm-10 col-md-4">
