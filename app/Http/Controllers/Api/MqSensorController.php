@@ -34,7 +34,7 @@ class MqSensorController extends Controller
         }
     }
 
-    function store(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'value' => [
@@ -45,7 +45,14 @@ class MqSensorController extends Controller
 
         $sensorData = MqSensor::create($request->all());
 
+        // Cek nilai sensor dan kirim notifikasi jika lebih dari 300ppm
+        if ($sensorData->value > 300) {
+            // Mengirim notifikasi untuk semua admin
+            WhatsappNotificationService::notifikasiKebocoranGasMassal($sensorData->value);
+        }
+
         return response()
             ->json($sensorData, 201);
     }
+
 }
