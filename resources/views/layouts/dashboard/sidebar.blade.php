@@ -30,14 +30,14 @@
           ">
             <a href="{{ route('sensor.index')}}" class="iq-waves-effect"><i class="ri-sensor-line"></i><span>Sensor</span></a>
           </li>
-          <li class="
+          {{-- <li class="
           @if (request()->url() == route('led.index'))
             active
           @endif
           ">
           <a href="{{ route('led.index')}}" class="iq-waves-effect"><i class="ri-lightbulb-line"></i><span>LED Control</span></a>
 
-          </li>
+          </li> --}}
 
           @if (auth()->user()->role == 'admin')
           <li class="

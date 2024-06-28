@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <!-- Rain sensor -->
+        {{-- <!-- Rain sensor -->
         <div class="col-sm-10 col-md-4">
             <div class="card iq-mb-3">
                 <div class="card-body">
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @push('scripts')
@@ -138,6 +138,7 @@
             }
         }
 
+        /* Commented out Rain Sensor Speedometer
         async function requestGaugeRain() {
             const result = await fetch("{{ route('api.sensors.rain.index') }}");
             if (result.ok) {
@@ -153,6 +154,7 @@
                 setTimeout(requestGaugeRain, 3000);
             }
         }
+        */
 
         window.addEventListener('load', function() {
             chartGas = new Highcharts.Chart({
@@ -299,7 +301,7 @@
                 yAxis: {
                     min: 0,
                     max: 100,
-                    tickPixelInterval: 10,
+                    tickPixelInterval: 72,
                     tickPosition: 'inside',
                     tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
                     tickLength: 20,
@@ -314,18 +316,18 @@
                     lineWidth: 0,
                     plotBands: [{
                         from: 0,
-                        to: 40,
+                        to: 20,
                         color: '#DF5353', // red
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 40,
-                        to: 60,
+                        from: 20,
+                        to: 40,
                         color: '#DDDF0D', // yellow
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 60,
+                        from: 40,
                         to: 100,
                         color: '#55BF3B', // green
                         thickness: 20,
@@ -390,7 +392,7 @@
                 yAxis: {
                     min: 0,
                     max: 50,
-                    tickPixelInterval: 5,
+                    tickPixelInterval: 72,
                     tickPosition: 'inside',
                     tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
                     tickLength: 20,
@@ -406,19 +408,19 @@
                     plotBands: [{
                         from: 0,
                         to: 10,
-                        color: '#55BF3B', // green
+                        color: '#DF5353', // red
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
                         from: 10,
-                        to: 30,
+                        to: 20,
                         color: '#DDDF0D', // yellow
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 30,
+                        from: 20,
                         to: 50,
-                        color: '#DF5353', // red
+                        color: '#55BF3B', // green
                         thickness: 20,
                         borderRadius: '50%'
                     }]
@@ -455,6 +457,7 @@
                 }]
             });
 
+            /* Commented out Rain Sensor Speedometer
             gaugeRain = new Highcharts.Chart({
                 chart: {
                     renderTo: 'gaugeRain',
@@ -480,8 +483,8 @@
                 },
                 yAxis: {
                     min: 0,
-                    max: 1000,
-                    tickPixelInterval: 50,
+                    max: 1023,
+                    tickPixelInterval: 72,
                     tickPosition: 'inside',
                     tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
                     tickLength: 20,
@@ -496,20 +499,20 @@
                     lineWidth: 0,
                     plotBands: [{
                         from: 0,
-                        to: 199,
-                        color: '#55BF3B', // green
+                        to: 500,
+                        color: '#DF5353', // red
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 200,
-                        to: 299,
+                        from: 500,
+                        to: 800,
                         color: '#DDDF0D', // yellow
                         thickness: 20,
                         borderRadius: '50%'
                     }, {
-                        from: 300,
-                        to: 1000,
-                        color: '#DF5353', // red
+                        from: 800,
+                        to: 1023,
+                        color: '#55BF3B', // green
                         thickness: 20,
                         borderRadius: '50%'
                     }]
@@ -545,7 +548,7 @@
                     }
                 }]
             });
+            */
         });
     </script>
-
 @endpush
